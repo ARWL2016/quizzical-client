@@ -1,0 +1,10 @@
+.QuizInfo {
+    border: 1px dotted red;
+    text-align: center; 
+    max-width: 500px;
+    margin: 30px auto;
+}
+
+.QuizInfo > h1 {
+    color: darkolivegreen;
+}

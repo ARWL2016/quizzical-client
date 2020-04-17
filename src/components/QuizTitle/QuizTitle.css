@@ -1,0 +1,13 @@
+.QuizTitle {
+    color: white;
+    font-weight: bold;
+    background-color: steelblue;
+    padding: 20px 10px;
+    max-width: 300px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.QuizTitle:hover {
+    cursor: pointer;
+}
