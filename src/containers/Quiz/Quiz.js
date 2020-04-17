@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { getQuizQuestions } from '../../data/quiz-data';
 import Question from '../../components/Question/Question';
+import Button from 'react-bootstrap/Button';
+import './Quiz.css';
 
 class Quiz extends Component {
 
@@ -26,7 +28,6 @@ class Quiz extends Component {
         if (quizQuestions) {
             this.quiz = quizQuestions.quiz;
             this.questions = quizQuestions.questions;
-            this.length = this.questions.length;
 
             this.setState({
                 selectedQuestion: this.questions[0],
@@ -67,11 +68,11 @@ class Quiz extends Component {
 
         return (
             <React.Fragment>
-                <h1>{this.quiz.title}</h1>
+                <h2>{this.quiz.title}</h2>
                 <Question key={selectedQuestion.id} {...selectedQuestion} clickHandler={this.clickHandler}></Question>
                 <div>
-                    <button disabled={count === 0} onClick={() => this.nextHandler(-1)}>Previous</button>
-                    <button disabled={isLast} onClick={() => this.nextHandler(1)}>Next</button>
+                    <Button variant="secondary" disabled={count === 0} onClick={() => this.nextHandler(-1)}>Previous</Button>
+                    <Button variant="primary" disabled={isLast} onClick={() => this.nextHandler(1)}>Next</Button>
                 </div>
                 <div>{JSON.stringify(this.state)}</div>
 

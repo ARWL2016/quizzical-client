@@ -27,7 +27,7 @@ class QuizHeader extends Component {
 
     render() {
         return (
-            <div className="QuizInfo">
+            <div className="quiz-header">
                 <h1>QUIZ INFO</h1>
                 <p>{this.state.quiz.title}</p>
                 <button className="btn-default" onClick={this.backHandler}>Back to Quiz List</button>
