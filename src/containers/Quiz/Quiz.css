@@ -1,4 +1,35 @@
+.quiz-container {
+    border: 1px solid skyblue;
+    margin: 10px auto;
+    max-width: 800px;
+}
 
+.quiz-container > header {
+    background-color: #20232a;
+    color: skyblue;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.quiz-container > header > h2 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.quiz-container > main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    justify-content: space-between;
+
+}
+
+.quiz-container > main > h2 {
+
+}
 
 Button {
     margin-right: 5px;

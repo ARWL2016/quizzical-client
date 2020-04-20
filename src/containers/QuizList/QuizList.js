@@ -29,11 +29,9 @@ class QuizList extends Component {
     }
 
     render() {
-        const titles = this.renderTitles();
         return (
             <div className="QuizList">
-                <h1>Quiz Titles</h1>
-                { titles }
+                { this.renderTitles() }
             </div>
         )
     }

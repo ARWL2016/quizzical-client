@@ -7,6 +7,7 @@ import QuizList from '../QuizList/QuizList';
 import Quiz from '../Quiz/Quiz';
 import './Layout.css';
 import QuizHeader from '../QuizHeader/QuizHeader';
+import TopNav from '../../components/TopNav/TopNav'
 
 class LayoutContainer extends Component {
 
@@ -14,7 +15,7 @@ class LayoutContainer extends Component {
     render() {
         return (
             <div className="LayoutContainer">
-                <h1>Quizzical</h1>
+                <TopNav></TopNav>
 
                 {/* <QuizList/> */}
                 <Switch>

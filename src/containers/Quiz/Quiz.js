@@ -39,6 +39,7 @@ class Quiz extends Component {
     }
 
     clickHandler = (answer, questionId) => {
+        console.log(answer)
         const state = { ...this.state };
         state.answers[questionId] = answer
 
@@ -51,7 +52,7 @@ class Quiz extends Component {
 
             return {
                 selectedQuestion: this.questions[newCount],
-                answers: {...state.answers},
+                answers: { ...state.answers },
                 count: newCount
             }
 
@@ -63,20 +64,32 @@ class Quiz extends Component {
     render() {
         if (!this.state.selectedQuestion) { return <div /> }
 
-        const {selectedQuestion, count} = this.state;
+        const { selectedQuestion, count, answers } = this.state;
         const isLast = count === this.questions.length - 1;
+        const answerGiven = answers ? answers[selectedQuestion.id] : null;
+
+        console.log({ answerGiven });
 
         return (
-            <React.Fragment>
-                <h2>{this.quiz.title}</h2>
-                <Question key={selectedQuestion.id} {...selectedQuestion} clickHandler={this.clickHandler}></Question>
-                <div>
-                    <Button variant="secondary" disabled={count === 0} onClick={() => this.nextHandler(-1)}>Previous</Button>
-                    <Button variant="primary" disabled={isLast} onClick={() => this.nextHandler(1)}>Next</Button>
-                </div>
-                <div>{JSON.stringify(this.state)}</div>
+            <section className="quiz-container">
+                <header>
+                    <h2>{this.quiz.title}</h2>
+                    <span>{count + 1} / {this.questions.length}</span>
+                </header>
+                <main>
+                    <div>
+                        <Question key={selectedQuestion.id} {...selectedQuestion} answerGiven={answerGiven} clickHandler={this.clickHandler}></Question>
 
-            </React.Fragment>
+                    </div>
+                    <div>
+                        <Button variant="secondary" disabled={count === 0} onClick={() => this.nextHandler(-1)}>Previous</Button>
+                        <Button variant="primary" disabled={isLast} onClick={() => this.nextHandler(1)}>Next</Button>
+                    </div>
+
+                </main>
+                {/* <div>{JSON.stringify(this.state)}</div> */}
+            </section>
+
         )
     }
 }

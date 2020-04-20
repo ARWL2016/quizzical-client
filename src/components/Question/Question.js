@@ -1,18 +1,27 @@
 import React from 'react';
 import './Question.css';
 
+// renders into Quiz
+
 const question = (props) => {
 
-    const renderAnswer = () => {
+    console.log(props)
+
+    const renderAnswers = () => {
         return props.answer.map(a => {
-            return <button key={a} onClick={() => props.clickHandler(a, props.id)}>{a}</button>
+            return (
+                <div className="radio-button-wrapper" key={a}>
+                    <input  type="radio" id={a} value={a} onChange={() => props.clickHandler(a, props.id)} checked={a === props.answerGiven}></input>
+                    <label htmlFor={a}>{a}</label>
+                </div>
+            )
         })
     }
 
     return (
         <React.Fragment>
-            <h3>{props.text}</h3>
-            {renderAnswer()}
+            <p className="question">{props.text}</p>
+            {renderAnswers()}
         </React.Fragment>
     )
 }
