@@ -1,5 +1,5 @@
 import React from 'react';
-import './Question.css';
+import './Question.scss';
 
 // renders into Quiz
 
@@ -10,7 +10,7 @@ const question = (props) => {
     const renderAnswers = () => {
         return props.answer.map(a => {
             return (
-                <div className="radio-button-wrapper" key={a}>
+                <div key={a}>
                     <input  type="radio" id={a} value={a} onChange={() => props.clickHandler(a, props.id)} checked={a === props.answerGiven}></input>
                     <label htmlFor={a}>{a}</label>
                 </div>
@@ -19,10 +19,10 @@ const question = (props) => {
     }
 
     return (
-        <React.Fragment>
-            <p className="question">{props.text}</p>
+        <form className="question">
+            <p>{props.text}</p>
             {renderAnswers()}
-        </React.Fragment>
+        </form>
     )
 }
 

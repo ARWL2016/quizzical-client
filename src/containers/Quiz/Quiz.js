@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { getQuizQuestions } from '../../data/quiz-data';
 import Question from '../../components/Question/Question';
-import Button from 'react-bootstrap/Button';
-import './Quiz.css';
+import './Quiz.scss';
 
 class Quiz extends Component {
 
@@ -71,24 +70,25 @@ class Quiz extends Component {
         console.log({ answerGiven });
 
         return (
-            <section className="quiz-container">
+            <div className="quiz-container">
                 <header>
                     <h2>{this.quiz.title}</h2>
                     <span>{count + 1} / {this.questions.length}</span>
                 </header>
-                <main>
+                <section>
                     <div>
                         <Question key={selectedQuestion.id} {...selectedQuestion} answerGiven={answerGiven} clickHandler={this.clickHandler}></Question>
 
                     </div>
                     <div>
-                        <Button variant="secondary" disabled={count === 0} onClick={() => this.nextHandler(-1)}>Previous</Button>
-                        <Button variant="primary" disabled={isLast} onClick={() => this.nextHandler(1)}>Next</Button>
+                    <button className="previous" disabled={count === 0} onClick={() => this.nextHandler(-1)}>Previous</button>
+                    <button className="next" disabled={isLast} onClick={() => this.nextHandler(1)}>Next</button>
+
                     </div>
 
-                </main>
+                </section>
                 {/* <div>{JSON.stringify(this.state)}</div> */}
-            </section>
+            </div>
 
         )
     }

@@ -1,4 +1,4 @@
-.QuizTitle {
+div.quiz-title {
     color: white;
     font-weight: bold;
     background-color: steelblue;
@@ -6,8 +6,9 @@
     max-width: 300px;
     margin: 10px auto;
     text-align: center;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
-.QuizTitle:hover {
-    cursor: pointer;
-}

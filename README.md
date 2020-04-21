@@ -12,7 +12,6 @@ Data
 - show quiz status on header screen
 
 Tech
-- add new CSS method
 - add Redux
 
 Features

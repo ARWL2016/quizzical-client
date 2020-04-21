@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import LayoutContainer from './containers/Layout/Layout';
-import './App.css';
+import LayoutContainer from './core/Layout/Layout';
+import './App.scss';
 import {BrowserRouter} from 'react-router-dom';
 
 class App extends Component {

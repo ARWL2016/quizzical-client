@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { getQuizById } from '../../data/quiz-data';
-import './QuizHeader.css';
+import './QuizHeader.scss';
 
 class QuizHeader extends Component {
     state = {

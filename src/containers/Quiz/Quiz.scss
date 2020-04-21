@@ -1,0 +1,46 @@
+@import '../../styles/variables';
+@import '../../styles//mixins';
+
+div.quiz-container {
+    border: 1px solid $darkBackground;
+    margin: 10px auto;
+    max-width: 800px;
+
+    header {
+        background-color: $darkBackground;
+        color: $skyBlue;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h2 {
+            font-size: 20px;
+            margin: 0;
+        }
+    }
+
+    section {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        min-height: 300px;
+        justify-content: space-between;
+
+        Button {
+            margin-right: 5px;
+        }
+
+        button.previous, button.next {
+            @include button($darkBackground, $skyBlue)
+        }
+
+
+
+
+
+    }
+}
+
+
+

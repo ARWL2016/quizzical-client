@@ -3,11 +3,11 @@
 import React, {Component} from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom';
 
-import QuizList from '../QuizList/QuizList';
-import Quiz from '../Quiz/Quiz';
-import './Layout.css';
-import QuizHeader from '../QuizHeader/QuizHeader';
-import TopNav from '../../components/TopNav/TopNav'
+import QuizList from '../../containers/QuizList/QuizList';
+import Quiz from '../../containers/Quiz/Quiz';
+import './Layout.scss';
+import QuizHeader from '../../containers/QuizHeader/QuizHeader';
+import TopNav from '../TopNav/TopNav'
 
 class LayoutContainer extends Component {
 
@@ -17,13 +17,12 @@ class LayoutContainer extends Component {
             <div className="LayoutContainer">
                 <TopNav></TopNav>
 
-                {/* <QuizList/> */}
+
                 <Switch>
                     <Route path="/home" component={QuizList} />
-
-                    {/* Quiz Header Component */}
                     <Route path="/info/:id" component={QuizHeader} />
                     <Route path="/quiz/:id" component={Quiz} />
+
                     <Redirect to="/home" />
                 </Switch>
             </div>
