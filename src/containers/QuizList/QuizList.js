@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import QuizTitle from 'components/QuizTitle/QuizTitle';
 import { getAll } from 'data/quiz-data';
 
-class QuizList extends Component {
+export default class QuizList extends Component {
     state = {
         quizTitles: [{ title: '', id: 0 }]
     }
@@ -37,4 +37,4 @@ class QuizList extends Component {
     }
 }
 
-export default QuizList;
+// export default QuizList;

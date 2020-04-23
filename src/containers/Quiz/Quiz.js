@@ -76,6 +76,7 @@ class Quiz extends Component {
 
         if (result) {
             console.log(result);
+            this.props.history.push('/result');
         }
 
 
@@ -88,15 +89,12 @@ class Quiz extends Component {
         )
     }
 
-
     render() {
         if (!this.state.selectedQuestion) { return <div /> }
 
         const { selectedQuestion, count, answers } = this.state;
         const isLast = count === this.questions.length - 1;
         const answerGiven = answers ? answers[selectedQuestion.id] : null;
-
-        console.log({ answerGiven });
 
         return (
             <div className="quiz-container">
@@ -118,7 +116,6 @@ class Quiz extends Component {
                     </div>
 
                 </section>
-                {/* <div>{JSON.stringify(this.state)}</div> */}
             </div>
 
         )
