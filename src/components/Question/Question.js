@@ -8,11 +8,11 @@ const question = (props) => {
     console.log(props)
 
     const renderAnswers = () => {
-        return props.answer.map(a => {
+        return props.answers.map(answer => {
             return (
-                <div key={a}>
-                    <input  type="radio" id={a} value={a} onChange={() => props.clickHandler(a, props.id)} checked={a === props.answerGiven}></input>
-                    <label htmlFor={a}>{a}</label>
+                <div key={answer}>
+                    <input  type="radio" id={answer} value={answer} onChange={() => props.clickHandler(answer, props.id)} checked={answer === props.answerGiven}></input>
+                    <label htmlFor={answer}>{answer}</label>
                 </div>
             )
         })

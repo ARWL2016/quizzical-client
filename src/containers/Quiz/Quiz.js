@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { getQuizQuestions } from '../../data/quiz-data';
-import Question from '../../components/Question/Question';
+
+import { getQuizQuestions } from 'data/quiz-data';
+import { checkQuizAnswers } from 'data/attempt-data';
+import Question from 'components/Question/Question';
 import './Quiz.scss';
 
 class Quiz extends Component {
@@ -18,15 +20,18 @@ class Quiz extends Component {
         super(props);
         this.clickHandler = this.clickHandler.bind(this);
         this.nextHandler = this.nextHandler.bind(this);
+        this.checkHandler = this.checkHandler.bind(this);
     }
 
     async componentDidMount() {
         const quizQuestions = await getQuizQuestions(this.props.match.params.id);
 
 
+
         if (quizQuestions) {
             this.quiz = quizQuestions.quiz;
             this.questions = quizQuestions.questions;
+            console.log(this.quiz)
 
             this.setState({
                 selectedQuestion: this.questions[0],
@@ -58,6 +63,30 @@ class Quiz extends Component {
         });
     }
 
+    checkHandler = async () => {
+        console.log(this.state.answers);
+
+        const payload = {
+            answers: this.state.answers,
+            quiz_id: this.quiz.id,
+            user_id: this.quiz.user_id
+        }
+
+        const result = await checkQuizAnswers(payload);
+
+        if (result) {
+            console.log(result);
+        }
+
+
+    }
+
+    renderSaveButton(isLast) {
+        if (!isLast) { return }
+        return (
+            <button className="next" onClick={() => this.checkHandler()}>Check Answers</button>
+        )
+    }
 
 
     render() {
@@ -83,6 +112,8 @@ class Quiz extends Component {
                     <div>
                     <button className="previous" disabled={count === 0} onClick={() => this.nextHandler(-1)}>Previous</button>
                     <button className="next" disabled={isLast} onClick={() => this.nextHandler(1)}>Next</button>
+
+                    {this.renderSaveButton(isLast)}
 
                     </div>
 

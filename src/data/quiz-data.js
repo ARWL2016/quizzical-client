@@ -30,6 +30,8 @@ async function getQuizQuestions(id) {
     }
 }
 
+
+
 export {
     getAll, getQuizById, getQuizQuestions
 }

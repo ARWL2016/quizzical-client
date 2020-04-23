@@ -2,9 +2,8 @@ Todo
 
 UI:
 - add save buttons
+- wire up save
 - create answer summary screen
-- fix quiz header page
-- add home link to logo
 
 Data
 - add save method: check answers on backend

@@ -27,12 +27,9 @@ div.quiz-container {
         min-height: 300px;
         justify-content: space-between;
 
-        Button {
+        button {
+            @include button($darkBackground, $skyBlue);
             margin-right: 5px;
-        }
-
-        button.previous, button.next {
-            @include button($darkBackground, $skyBlue)
         }
 
 

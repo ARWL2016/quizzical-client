@@ -26,12 +26,13 @@ class QuizHeader extends Component {
     }
 
     render() {
+
+        console.log(this.state);
         return (
             <div className="quiz-header">
-                <h1>QUIZ INFO</h1>
-                <p>{this.state.quiz.title}</p>
-                <button className="btn-default" onClick={this.backHandler}>Back to Quiz List</button>
-                <button className="btn-default" onClick={this.startQuizHandler}>Start Quiz</button>
+                <h1>{this.state.quiz.title}</h1>
+                <button onClick={this.backHandler}>Back to Quiz List</button>
+                <button onClick={this.startQuizHandler}>Start Quiz</button>
             </div>
         )
     }

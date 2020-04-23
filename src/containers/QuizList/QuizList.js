@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import QuizTitle from '../../components/QuizTitle/QuizTitle';
-import { getAll } from '../../data/quiz-data';
+import QuizTitle from 'components/QuizTitle/QuizTitle';
+import { getAll } from 'data/quiz-data';
 
 class QuizList extends Component {
     state = {
