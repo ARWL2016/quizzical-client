@@ -22,7 +22,7 @@ class QuizHeader extends Component {
     }
 
     startQuizHandler = () => {
-        this.props.history.push("/quiz/" + this.state.quiz.id);
+        this.props.history.push("/quiz/" + this.state.quiz.quiz_id);
     }
 
     render() {

@@ -1,9 +1,7 @@
 Todo
 
-UI:
-- create answer summary screen
-
 Data
+- write design SQL
 - remove answers from backend
 - show quiz status on header screen
 - show previous attempts on header screen

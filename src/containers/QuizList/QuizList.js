@@ -12,7 +12,7 @@ export default class QuizList extends Component {
         const quizList = await getAll();
 
         if (quizList) {
-            const quizTitles = quizList.map(quiz => ({ id: quiz.id, title: quiz.title }));
+            const quizTitles = quizList.map(quiz => ({ id: quiz.quiz_id, title: quiz.title }));
             this.setState({ quizTitles });
         }
 

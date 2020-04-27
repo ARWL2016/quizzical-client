@@ -68,7 +68,7 @@ class Quiz extends Component {
 
         const payload = {
             answers: this.state.answers,
-            quiz_id: this.quiz.id,
+            quiz_id: this.quiz.quiz_id,
             user_id: this.quiz.user_id
         }
 
