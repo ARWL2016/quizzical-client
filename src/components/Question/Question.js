@@ -7,12 +7,14 @@ const question = (props) => {
 
     console.log(props)
 
+    const { options, text, question_number, question_id, optionIdSelected } = props;
+
     const renderAnswers = () => {
-        return props.answers.map(answer => {
+        return Object.keys(options).map(optionId => {
             return (
-                <div key={answer}>
-                    <input  type="radio" id={answer} value={answer} onChange={() => props.clickHandler(answer, props.id)} checked={answer === props.answerGiven}></input>
-                    <label htmlFor={answer}>{answer}</label>
+                <div key={optionId}>
+                    <input  type="radio" id={optionId} value={options[optionId]} onChange={() => props.clickHandler(question_id, optionId)} checked={optionId === optionIdSelected}></input>
+                    <label htmlFor={optionId}>{options[optionId]}</label>
                 </div>
             )
         })
@@ -20,7 +22,7 @@ const question = (props) => {
 
     return (
         <form className="question">
-            <p>{props.text}</p>
+            <p>{question_number}. {text}</p>
             {renderAnswers()}
         </form>
     )

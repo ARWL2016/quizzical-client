@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { getQuizQuestions } from 'data/quiz-data';
-import { checkQuizAnswers } from 'data/attempt-data';
+import { postAttempt } from 'data/attempt-data';
 import Question from 'components/Question/Question';
 import './Quiz.scss';
 
@@ -32,6 +32,7 @@ class Quiz extends Component {
             this.quiz = quizQuestions.quiz;
             this.questions = quizQuestions.questions;
             console.log(this.quiz)
+            console.log(this.questions);
 
             this.setState({
                 selectedQuestion: this.questions[0],
@@ -42,10 +43,9 @@ class Quiz extends Component {
         }
     }
 
-    clickHandler = (answer, questionId) => {
-        console.log(answer)
+    clickHandler = (questionId, optionId) => {
         const state = { ...this.state };
-        state.answers[questionId] = answer
+        state.answers[questionId] = optionId
 
         this.setState(state);
     }
@@ -72,11 +72,12 @@ class Quiz extends Component {
             user_id: this.quiz.user_id
         }
 
-        const result = await checkQuizAnswers(payload);
+        const result = await postAttempt(payload);
+        console.log(result);
 
         if (result) {
             console.log(result);
-            this.props.history.push('/result');
+            this.props.history.push(`/result/${result.attempt_id}`);
         }
 
 
@@ -94,7 +95,7 @@ class Quiz extends Component {
 
         const { selectedQuestion, count, answers } = this.state;
         const isLast = count === this.questions.length - 1;
-        const answerGiven = answers ? answers[selectedQuestion.id] : null;
+        const optionIdSelected = answers ? answers[selectedQuestion.question_id] : null;
 
         return (
             <div className="quiz-container">
@@ -104,7 +105,7 @@ class Quiz extends Component {
                 </header>
                 <section>
                     <div>
-                        <Question key={selectedQuestion.id} {...selectedQuestion} answerGiven={answerGiven} clickHandler={this.clickHandler}></Question>
+                        <Question key={selectedQuestion.question_id} {...selectedQuestion} optionIdSelected={optionIdSelected} clickHandler={this.clickHandler}></Question>
 
                     </div>
                     <div>

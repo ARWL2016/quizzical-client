@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getLastResult } from 'data/attempt-data';
+import { getAttemptReport } from 'data/attempt-data';
 import Card from 'components/Card/Card';
 import './Result.scss';
 
@@ -9,11 +9,14 @@ export default class Result extends Component {
 
     state = {};
 
-    componentDidMount() {
-        const lastResult = getLastResult();
+    async componentDidMount() {
 
-        this.setState({...lastResult});
-        // this.setState(temp)
+        const attempt = await getAttemptReport(1);
+        if (attempt) {
+            console.log(attempt);
+            this.setState({ ...attempt });
+        }
+
     }
 
     renderErrors() {
@@ -25,22 +28,25 @@ export default class Result extends Component {
                     <p>Here's what you got wrong...</p>
 
                     <table>
-                        <tr>
-                            <th></th>
-                            <th>Your answer</th>
-                            <th>Correct answer</th>
-                        </tr>
-                        {errors.map(e => {
-                            return (
-                                <tr>
-                                    <td>{e.question_id}) {e.text}</td>
-                                    <td style={{ 'text-align': 'center' }}>{e.option_selected}</td>
-                                    <td style={{ 'text-align': 'center' }}>{e.correct_option}</td>
-                                </tr>
-                            )
-                        })}
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Your answer</th>
+                                <th>Correct answer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {errors.map(e => {
+                                return (
+                                    <tr key={e.question_id}>
+                                        <td>{e.question_id}) {e.text}</td>
+                                        <td style={{ 'textAlign': 'center' }}>{e.option_selected}</td>
+                                        <td style={{ 'textAlign': 'center' }}>{e.correct_option}</td>
+                                    </tr>
+                                )
+                            })}
 
-
+                        </tbody>
                     </table>
                 </>
             )
@@ -63,7 +69,7 @@ export default class Result extends Component {
                 <div className="result-container">
 
                     <Card className="result-container"
-                        header={<h2>{this.state.quiz_title}</h2>}
+                        header={this.state.quiz_title}
                         body={
                             <>
                                 <div className="score">You scored {this.state.score} out of {this.state.num_questions}</div>

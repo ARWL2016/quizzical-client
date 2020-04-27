@@ -1,11 +1,21 @@
 import axios from 'axios';
 
-let lastResult;
 
-async function checkQuizAnswers(payload) {
+async function getAttemptReport(id) {
+    try {
+        const response = await axios.get(`http://localhost:3001/attempt/${id}/report`);
+
+
+        return response.data.data.report;
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function postAttempt(payload) {
     try {
         const response = await axios.post(`http://localhost:3001/attempt`, payload);
-        lastResult = response.data.data.result;
 
         return response.data.data.result;
 
@@ -14,10 +24,8 @@ async function checkQuizAnswers(payload) {
     }
 }
 
-function getLastResult() {
-    return lastResult;
-}
+
 
 export {
-    checkQuizAnswers, getLastResult
+    postAttempt, getAttemptReport
 }

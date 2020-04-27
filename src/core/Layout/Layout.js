@@ -23,7 +23,7 @@ class LayoutContainer extends Component {
                     <Route path="/home" component={QuizList} />
                     <Route path="/info/:id" component={QuizHeader} />
                     <Route path="/quiz/:id" component={Quiz} />
-                    <Route path="/result" component={Result} />
+                    <Route path="/result/:id" component={Result} />
 
                     <Redirect to="/home" />
                 </Switch>

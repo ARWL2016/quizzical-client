@@ -1,17 +1,20 @@
 Todo
 
+UI
+- add completion status bar
+
 Data
-- write design SQL
-- remove answers from backend
-- show quiz status on header screen
-- show previous attempts on header screen
+
+
+- load result page from attempt id
 
 Tech
 - add Redux
 
-Features
+Feature Requests
 - add create quiz form
 - add login
+- show previous attempts on header screen
 
 Bug fixes
 - handle incomplete answers
