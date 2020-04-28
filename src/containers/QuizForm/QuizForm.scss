@@ -1,0 +1,11 @@
+@import '../../styles/variables';
+@import '../../styles//mixins';
+
+form.quiz-form-container {
+    button {
+        @include button($darkBackground, $skyBlue);
+        margin-right: 5px;
+    }
+
+}
+

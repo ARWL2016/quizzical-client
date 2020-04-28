@@ -11,10 +11,17 @@ nav.top-nav {
     padding: 20px;
 
     span {
+        color: $skyBlue;
+    }
+
+    span.logo {
         font-size: 18px;
         margin: 0;
         letter-spacing: 1px;
         text-transform: uppercase;
-        color: $skyBlue;
+    }
+
+    span.menu-item {
+
     }
 }

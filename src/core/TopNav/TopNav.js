@@ -7,7 +7,11 @@ const topnav = (props) => {
     return (
         <nav className="top-nav">
             <Link to="/home">
-                <span>quizzical?</span>
+                <span className="logo">quizzical?</span>
+
+            </Link>
+            <Link to="/add">
+                <span className="menu-item">Add Quiz</span>
 
             </Link>
         </nav>

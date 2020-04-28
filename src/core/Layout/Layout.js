@@ -7,6 +7,7 @@ import QuizList from 'containers/QuizList/QuizList';
 import Quiz from 'containers/Quiz/Quiz';
 import './Layout.scss';
 import QuizHeader from 'containers/QuizHeader/QuizHeader';
+import QuizForm from 'containers/QuizForm/QuizForm';
 import TopNav from '../TopNav/TopNav';
 import Result from 'containers/Result/Result';
 
@@ -24,6 +25,7 @@ class LayoutContainer extends Component {
                     <Route path="/info/:id" component={QuizHeader} />
                     <Route path="/quiz/:id" component={Quiz} />
                     <Route path="/result/:id" component={Result} />
+                    <Route path="/add" component={QuizForm} />
 
                     <Redirect to="/home" />
                 </Switch>

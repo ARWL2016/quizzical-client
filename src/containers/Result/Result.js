@@ -10,8 +10,9 @@ export default class Result extends Component {
     state = {};
 
     async componentDidMount() {
+        const id = +this.props.match.params.id;
 
-        const attempt = await getAttemptReport(1);
+        const attempt = await getAttemptReport(id);
         if (attempt) {
             console.log(attempt);
             this.setState({ ...attempt });
