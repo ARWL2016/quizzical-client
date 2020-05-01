@@ -1,5 +1,17 @@
 import axios from 'axios';
 
+
+let count = 0;
+
+function increment() {
+  count = count + 1;
+}
+
+function getCount() {
+  console.log(count);
+  return count;
+}
+
 async function getAll() {
     try {
         const response = await axios.get(`http://localhost:3001/quiz`);
@@ -33,5 +45,5 @@ async function getQuizQuestions(id) {
 
 
 export {
-    getAll, getQuizById, getQuizQuestions
+    getAll, getQuizById, getQuizQuestions, increment, getCount, count
 }

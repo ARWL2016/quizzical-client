@@ -18,9 +18,9 @@ class Quiz extends Component {
 
     constructor(props) {
         super(props);
-        this.clickHandler = this.clickHandler.bind(this);
-        this.nextHandler = this.nextHandler.bind(this);
-        this.checkHandler = this.checkHandler.bind(this);
+        // this.clickHandler = this.clickHandler.bind(this);
+        // this.nextHandler = this.nextHandler.bind(this);
+        // this.checkHandler = this.checkHandler.bind(this);
     }
 
     async componentDidMount() {
@@ -83,6 +83,8 @@ class Quiz extends Component {
 
     }
 
+
+
     renderSaveButton(isLast) {
         if (!isLast) { return }
         return (
@@ -117,7 +119,9 @@ class Quiz extends Component {
                     </div>
 
                 </section>
+
             </div>
+
 
         )
     }

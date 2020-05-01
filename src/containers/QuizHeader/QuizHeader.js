@@ -25,6 +25,8 @@ class QuizHeader extends Component {
         this.props.history.push("/quiz/" + this.state.quiz.quiz_id);
     }
 
+
+
     render() {
 
         console.log(this.state);
@@ -33,6 +35,7 @@ class QuizHeader extends Component {
                 <h1>{this.state.quiz.title}</h1>
                 <button onClick={this.backHandler}>Back to Quiz List</button>
                 <button onClick={this.startQuizHandler}>Start Quiz</button>
+
             </div>
         )
     }
