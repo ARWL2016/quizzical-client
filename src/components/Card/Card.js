@@ -4,13 +4,14 @@ import './Card.scss';
 const card = (props) => {
     return (
         <div className="card">
-            <header>
+            <header className="card-header">
                 <h2>{props.header}</h2>
 
 
             </header>
-            <section>
+            <section className="card-section">
                 {props.body}
+                {props.children}
             </section>
         </div>
     )

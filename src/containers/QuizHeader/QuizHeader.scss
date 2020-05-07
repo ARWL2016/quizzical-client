@@ -7,7 +7,7 @@
     margin: 30px auto;
 
     button {
-        @include button($darkBackground, $skyBlue);
+        @include button($seaGreen, white);
         margin-right: 5px;
     }
 }

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import QuizTitle from 'components/QuizTitle/QuizTitle';
 import { getAll } from 'data/quiz-data';
-import { connect } from 'react-redux';
-import { STORE_RESULT, DELETE_RESULT } from 'store/actions';
+
 
 class QuizList extends Component {
     state = {
@@ -37,7 +36,6 @@ class QuizList extends Component {
             <div className="QuizList">
                 {this.renderTitles()}
                 {this.props.counter}
-                <button onClick={() => this.props.onStoreResult(this.props.counter)}>Store Result</button>
                 <ul>
                     {(this.props.results || []).map((r, idx) => {
                         return (
@@ -51,20 +49,7 @@ class QuizList extends Component {
     }
 }
 
-// export default QuizList;
+export default QuizList;
 
-const mapStateToProps = state => {
-    return {
-        counter: state.ctr.counter,
-        results: state.res.results
-    };
-};
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onStoreResult: (result) => dispatch({ type: STORE_RESULT, value: result }),
-        onDeleteResult: (v) => dispatch({ type: DELETE_RESULT, value: v})
-    };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuizList)

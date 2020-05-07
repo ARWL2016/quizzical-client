@@ -1,17 +1,16 @@
 @import "../../styles/variables";
 
-
 nav.top-nav {
     height: 60px;
-    background-color: $darkBackground;
-    color: $skyBlue;
+    background-color: $tomato;
+    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
 
     span {
-        color: $skyBlue;
+        color: white
     }
 
     span.logo {

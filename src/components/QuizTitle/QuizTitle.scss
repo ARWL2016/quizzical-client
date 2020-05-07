@@ -1,7 +1,9 @@
+@import '../../styles/variables';
+
 div.quiz-title {
     color: white;
     font-weight: bold;
-    background-color: steelblue;
+    background-color: $sandy;
     padding: 20px 10px;
     max-width: 300px;
     margin: 10px auto;

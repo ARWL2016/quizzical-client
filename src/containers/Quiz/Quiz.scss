@@ -2,13 +2,13 @@
 @import '../../styles//mixins';
 
 div.quiz-container {
-    border: 1px solid $darkBackground;
+    border: 1px solid $tomato;
     margin: 10px auto;
     max-width: 800px;
 
     header {
-        background-color: $darkBackground;
-        color: $skyBlue;
+        background-color: $tomato;
+        color: white;
         padding: 10px;
         display: flex;
         align-items: center;
@@ -28,7 +28,7 @@ div.quiz-container {
         justify-content: space-between;
 
         button {
-            @include button($darkBackground, $skyBlue);
+            @include button($seaGreen, white);
             margin-right: 5px;
         }
 

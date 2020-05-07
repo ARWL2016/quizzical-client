@@ -1,101 +1,205 @@
 import React, { Component } from 'react';
 import './QuizForm.scss';
+import { postQuiz } from 'data/quiz-data';
 
 class QuizForm extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            quizTitle: '',
-            questions: [{
-                number: 1,
-                text: 'test'
-            }]
-        }
-
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleAddQuestion = this.handleAddQuestion.bind(this);
+    state = {
+        quizTitle: '',
+        questions: []
     }
 
-    handleInputChange(event) {
-        const { name, value } = event.target;
-        console.log(event.target.name);
-        console.log(event.target.value);
-
-        if (name === 'quizTitle') {
-            this.setState({ quizTitle: value });
-        } else {
-
-            this.setState(state => {
-
-                return {
-                    questions: state.questions.map(q => {
-                        if (q.number === +name) {
-                            return {
-                                number: q.number,
-                                text: value
-                            }
-                        }
-
-                        return q;
-
-                    })
-                }
-            });
-        }
+    componentDidMount() {
+        this.addQuestion();
     }
 
-    handleAddQuestion(e) {
-        e.preventDefault();
+    addQuestion = () => {
         const next = this.state.questions.length + 1;
 
         this.setState(state => {
             return {
-                questions: [...state.questions, { number: next, text: ''}]
+                questions: [
+                    ...state.questions,
+                    {
+                        number: next,
+                        text: '',
+                        correctAnswer: '',
+                        options: ['', '', '']
+                    }
+                ]
             }
         })
     }
 
+    handleTitleChange = (event) => {
+        this.setState({ quizTitle: event.target.value });
+    }
+
+    handleQuestionChange = (event, questionNumber, fieldName) => {
+        const { name, value } = event.target;
+        console.log(event.target.name);
+        console.log(event.target.value);
+
+        this.setState(state => {
+            return {
+                questions: state.questions.map(question => {
+                    if (question.number === questionNumber) {
+                        return {
+                            ...question,
+                            [fieldName]: value,
+                        }
+                    } else {
+                        return question;
+                    }
+                })
+            }
+        });
+
+    }
+
+    handleOptionChange = (event, questionNumber, optionIndex) => {
+        const { name, value } = event.target;
+        console.log(value, questionNumber, optionIndex)
+
+        this.setState(state => {
+            return {
+                questions: state.questions.map(question => {
+                    if (question.number === questionNumber) {
+                        return {
+                            ...question,
+                            options: question.options.map((option, idx) => {
+                                return (idx === optionIndex) ? value : option;
+                            })
+                        }
+                    } else {
+                        return question;
+                    }
+                })
+            }
+        });
+    }
+
+    handleAddQuestion = (e) => {
+        e.preventDefault();
+        this.addQuestion();
+    }
+
+    handleRemoveQuestion = (event, questionNumber) => {
+        event.preventDefault();
+        console.log(questionNumber);
+
+        this.setState(state => {
+            const newQuestions = state.questions.filter(q => q.number !== questionNumber).map((q, idx) => {
+                return {
+                    ...q,
+                    number: idx + 1
+                }
+            })
+
+            return {
+                questions: newQuestions
+            }
+        });
 
 
+    }
+
+    handleFormSubmit = async (e) => {
+        e.preventDefault();
+        console.log(this.state)
+        const r = await postQuiz(this.state)
+    }
 
     render() {
         const { quizTitle, questions } = this.state;
 
-        if (!questions) { return null}
+        if (!questions) { return null }
 
         return (
-            <form className="quiz-form-container" onChange={this.handleInputChange}>
-                <section>
-                    <label htmlFor="quizTitle">Quiz Title
-                    <input type="text" name="quizTitle" value={quizTitle}></input>
-                    </label>
 
-                </section>
-                {questions.map((q, idx) => {
-                    return (
-                        <section key={idx}>
-                            <label htmlFor={q.number}>{q.number}
-                                <input
-                                    placeholder="add question text"
-                                    type="text"
-                                    name={q.number}
-                                    value={q.text}
+            <form className="quiz-form-container" onSubmit={this.handleFormSubmit}>
+                <div className="form-field-container">
+                    <div className="form-field title-field">
+                        <label htmlFor="quizTitle">Quiz Title</label>
+                        <input
+                            type="text"
+                            name="quizTitle"
+                            placeholder="add a snappy title"
+                            value={quizTitle}
+                            onChange={this.handleTitleChange}
+                            required="required"></input>
+                    </div>
+                    {questions.map((q, idx) => {
+                        return (
+                            <div key={idx} className="question-container">
+                                <div className="form-field" >
+                                    <label htmlFor={q.number}>Q{q.number}.</label>
+                                    <input
+                                        placeholder="add question text"
+                                        type="text"
+                                        name={q.number}
+                                        value={q.text}
+                                        onChange={(ev) => this.handleQuestionChange(ev, q.number, 'text')}
+                                        required="required"
                                     ></input>
-                            </label>
+                                </div>
 
-                        </section>
-                    )
-                })}
-                <button onClick={this.handleAddQuestion}>Add Question</button>
+                                <div className="answers-container">
+                                    <div className="form-field">
+                                        <label htmlFor="correctAnswer">Answer</label>
+                                        <input
+                                            type="text"
+                                            placeholder="correct answer text"
+                                            name="correctAnswer"
+                                            value={q.correctAnswer}
+                                            onChange={(ev) => this.handleQuestionChange(ev, q.number, 'correctAnswer')}
+                                            required="required"
+                                        ></input>
 
 
+                                    </div>
+
+                                    {q.options.map((option, idx) => {
+                                        return (
+                                            <div key={idx}>
+                                                <div className="form-field">
+                                                    <label htmlFor={option}>Option</label>
+                                                    <input
+                                                        type="text"
+                                                        placeholder={'alternative answer ' + (idx + 1)}
+                                                        name={option}
+                                                        value={option}
+                                                        onChange={(ev) => this.handleOptionChange(ev, q.number, idx)}
+                                                        required="required"
+                                                    ></input>
 
 
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                                {(questions.length < 2) ? null : (
+                                    <div className="question-button-container">
+                                        <button className="remove-question-button" onClick={(ev) => this.handleRemoveQuestion(ev, q.number)}>Remove Question</button>
+                                    </div>
+                                )}
+                            </div>
+                        )
+                    })}
+                    <div className="form-button-container">
+                        <button className="add-question-button" onClick={this.handleAddQuestion}>Add Question</button>
+                        <input type="submit" value="Save Quiz" />
+                    </div>
+
+                </div>
 
                 {JSON.stringify(this.state, null, 2)}
             </form>
+
+
+
+
 
         )
     }

@@ -1,17 +1,5 @@
 import axios from 'axios';
 
-
-let count = 0;
-
-function increment() {
-  count = count + 1;
-}
-
-function getCount() {
-  console.log(count);
-  return count;
-}
-
 async function getAll() {
     try {
         const response = await axios.get(`http://localhost:3001/quiz`);
@@ -42,8 +30,18 @@ async function getQuizQuestions(id) {
     }
 }
 
+async function postQuiz(quiz) {
+  try {
+    const response = await axios.post(`http://localhost:3001/quiz`, quiz);
+    return response.data.data;
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 
 
 export {
-    getAll, getQuizById, getQuizQuestions, increment, getCount, count
+    getAll, getQuizById, getQuizQuestions, postQuiz
 }
