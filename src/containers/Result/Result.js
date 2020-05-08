@@ -3,7 +3,7 @@ import { getAttemptReport } from 'data/attempt-data';
 import Card from 'components/Card/Card';
 import './Result.scss';
 
-const temp = { "attempt_id": 29, "quiz_id": 4, "user_id": 1, "datetime": "2020-04-27T09:33:37.926Z", "quiz_title": "Cities and Capitals", "results": [{ "question_id": 1, "text": "What is the capital of France?", "answer": "Lyon", "correct_answer": "Paris", "result": false }, { "question_id": 2, "text": "What is the capital of Germany?", "answer": "Berlin", "correct_answer": "Berlin", "result": true }], "num_questions": "2", "score": "1" };
+// const temp = { "attempt_id": 29, "quiz_id": 4, "user_id": 1, "datetime": "2020-04-27T09:33:37.926Z", "quiz_title": "Cities and Capitals", "results": [{ "question_id": 1, "text": "What is the capital of France?", "answer": "Lyon", "correct_answer": "Paris", "result": false }, { "question_id": 2, "text": "What is the capital of Germany?", "answer": "Berlin", "correct_answer": "Berlin", "result": true }], "num_questions": "2", "score": "1" };
 
 export default class Result extends Component {
 
@@ -14,7 +14,6 @@ export default class Result extends Component {
 
         const attempt = await getAttemptReport(id);
         if (attempt) {
-            console.log(attempt);
             this.setState({ ...attempt });
         }
 

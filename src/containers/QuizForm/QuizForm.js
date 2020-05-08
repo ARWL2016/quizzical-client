@@ -36,9 +36,7 @@ class QuizForm extends Component {
     }
 
     handleQuestionChange = (event, questionNumber, fieldName) => {
-        const { name, value } = event.target;
-        console.log(event.target.name);
-        console.log(event.target.value);
+        const { value } = event.target;
 
         this.setState(state => {
             return {
@@ -58,8 +56,7 @@ class QuizForm extends Component {
     }
 
     handleOptionChange = (event, questionNumber, optionIndex) => {
-        const { name, value } = event.target;
-        console.log(value, questionNumber, optionIndex)
+        const { value } = event.target;
 
         this.setState(state => {
             return {
@@ -86,7 +83,6 @@ class QuizForm extends Component {
 
     handleRemoveQuestion = (event, questionNumber) => {
         event.preventDefault();
-        console.log(questionNumber);
 
         this.setState(state => {
             const newQuestions = state.questions.filter(q => q.number !== questionNumber).map((q, idx) => {
@@ -106,8 +102,12 @@ class QuizForm extends Component {
 
     handleFormSubmit = async (e) => {
         e.preventDefault();
-        console.log(this.state)
-        const r = await postQuiz(this.state)
+
+        const quiz = await postQuiz(this.state);
+
+        if (quiz) {
+            this.props.history.push(`/home`);
+        }
     }
 
     render() {
@@ -194,7 +194,7 @@ class QuizForm extends Component {
 
                 </div>
 
-                {JSON.stringify(this.state, null, 2)}
+
             </form>
 
 

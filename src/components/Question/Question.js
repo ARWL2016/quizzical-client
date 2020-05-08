@@ -5,10 +5,6 @@ import './Question.scss';
 
 const question = (props) => {
 
-
-
-    console.log(props)
-
     const { options, text, question_number, question_id, optionIdSelected, sequence } = props;
 
     const renderAnswers = () => {

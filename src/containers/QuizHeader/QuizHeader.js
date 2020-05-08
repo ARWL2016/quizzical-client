@@ -25,11 +25,7 @@ class QuizHeader extends Component {
         this.props.history.push("/quiz/" + this.state.quiz.quiz_id);
     }
 
-
-
     render() {
-
-        console.log(this.state);
         return (
             <div className="quiz-header">
                 <h1>{this.state.quiz.title}</h1>
