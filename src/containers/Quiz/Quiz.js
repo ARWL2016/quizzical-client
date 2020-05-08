@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { getQuizQuestions } from 'data/quiz-data';
 import { postAttempt } from 'data/attempt-data';
 import Question from 'components/Question/Question';
+import Modal from 'components/Modal/Modal';
 import './Quiz.scss';
 
 class Quiz extends Component {
@@ -13,41 +14,41 @@ class Quiz extends Component {
     state = {
         selectedQuestion: null,
         answers: {},
-        count: 0
-    }
-
-    constructor(props) {
-        super(props);
-        // this.clickHandler = this.clickHandler.bind(this);
-        // this.nextHandler = this.nextHandler.bind(this);
-        // this.checkHandler = this.checkHandler.bind(this);
+        count: 0,
+        showModal: false,
+        invalidMessage: 'Please complete all questions'
     }
 
     async componentDidMount() {
         const quizQuestions = await getQuizQuestions(this.props.match.params.id);
 
-
-
         if (quizQuestions) {
             this.quiz = quizQuestions.quiz;
             this.questions = quizQuestions.questions;
-            console.log(this.quiz)
-            console.log(this.questions);
+
+            const answers = {};
+
+            this.questions.forEach(q => {
+                answers[q.question_id] = null
+            });
 
             this.setState({
                 selectedQuestion: this.questions[0],
-                answers: {},
+                answers: answers,
                 count: 0
-            })
-
+            });
         }
     }
 
     clickHandler = (questionId, optionId) => {
-        const state = { ...this.state };
-        state.answers[questionId] = optionId
-
-        this.setState(state);
+        this.setState((state) => {
+            return {
+                answers: {
+                    ...state.answers,
+                    [questionId]: optionId
+                }
+            }
+        })
     }
 
     nextHandler = (iteration) => {
@@ -64,26 +65,40 @@ class Quiz extends Component {
     }
 
     checkHandler = async () => {
-        console.log(this.state.answers);
+        if (this.checkValidity()) {
+            const payload = {
+                answers: this.state.answers,
+                quiz_id: this.quiz.quiz_id,
+                user_id: this.quiz.user_id
+            }
 
-        const payload = {
-            answers: this.state.answers,
-            quiz_id: this.quiz.quiz_id,
-            user_id: this.quiz.user_id
+            const result = await postAttempt(payload);
+
+            if (result) {
+                this.props.history.push(`/result/${result.attempt_id}`);
+            }
+
+        } else {
+            this.setState({ showModal: true });
         }
-
-        const result = await postAttempt(payload);
-        console.log(result);
-
-        if (result) {
-            console.log(result);
-            this.props.history.push(`/result/${result.attempt_id}`);
-        }
-
-
     }
 
+    handleModalClick = () => {
+        this.setState({ showModal: false })
+    }
 
+    checkValidity = () => {
+        let isValid = true;
+        const { answers } = this.state;
+
+        Object.keys(answers).forEach(key => {
+            if (answers[key] === null) {
+                isValid = false;
+            }
+        });
+
+        return isValid;
+    }
 
     renderSaveButton(isLast) {
         if (!isLast) { return }
@@ -105,20 +120,27 @@ class Quiz extends Component {
                     <h2>{this.quiz.title}</h2>
                     <span>{count + 1} / {this.questions.length}</span>
                 </header>
+
                 <section>
                     <div>
                         <Question key={selectedQuestion.question_id} {...selectedQuestion} optionIdSelected={optionIdSelected} clickHandler={this.clickHandler}></Question>
 
                     </div>
                     <div>
-                    <button className="previous" disabled={count === 0} onClick={() => this.nextHandler(-1)}>Previous</button>
-                    <button className="next" disabled={isLast} onClick={() => this.nextHandler(1)}>Next</button>
+                        <button className="previous" disabled={count === 0} onClick={() => this.nextHandler(-1)}>Previous</button>
+                        <button className="next" disabled={isLast} onClick={() => this.nextHandler(1)}>Next</button>
 
-                    {this.renderSaveButton(isLast)}
+                        {this.renderSaveButton(isLast)}
 
                     </div>
 
                 </section>
+                {/* {JSON.stringify(this.state)} */}
+
+                <Modal show={this.state.showModal} clicked={this.handleModalClick}>
+                    {this.state.invalidMessage}
+                </Modal>
+
 
             </div>
 

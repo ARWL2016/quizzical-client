@@ -1,20 +1,33 @@
-Todo
+### Quizzical Client
 
-UI
-- add completion status bar
+#### About
+Quizzical is a quiz app that allows users to create multiple choice quizzes and take quizzes created by other users.
 
-Data
+#### Technology
+- React 16.13
+- Create React App
+- Sass
+
+#### Features
 
 
-- load result page from attempt id
+
+
+#### Todo
+
+General
+- add documentation
 
 Tech
 - add Redux
 
 Feature Requests
-- add create quiz form
 - add login
-- show previous attempts on header screen
+- show previous attempts on header screen (requires user)
+- allow editing of quizzes
 
-Bug fixes
-- handle incomplete answers
+Bug
+
+Enhancements
+- add completion status bar on quiz
+

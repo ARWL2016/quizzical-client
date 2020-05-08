@@ -5,15 +5,17 @@ import './Question.scss';
 
 const question = (props) => {
 
+
+
     console.log(props)
 
-    const { options, text, question_number, question_id, optionIdSelected } = props;
+    const { options, text, question_number, question_id, optionIdSelected, sequence } = props;
 
     const renderAnswers = () => {
-        return Object.keys(options).map(optionId => {
+        return sequence.map(optionId => {
             return (
                 <div key={optionId}>
-                    <input  type="radio" id={optionId} value={options[optionId]} onChange={() => props.clickHandler(question_id, optionId)} checked={optionId === optionIdSelected}></input>
+                    <input type="radio" id={optionId} value={options[optionId]} onChange={() => props.clickHandler(question_id, optionId)} checked={optionId === optionIdSelected}></input>
                     <label htmlFor={optionId}>{options[optionId]}</label>
                 </div>
             )

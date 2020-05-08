@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { shuffle } from 'core/utils';
 
 async function getAll() {
     try {
@@ -23,7 +24,20 @@ async function getQuizById(id) {
 async function getQuizQuestions(id) {
   try {
       const response = await axios.get(`http://localhost:3001/quiz/${id}/questions`);
-      return response.data.data;
+
+
+      const {quiz, questions } = response.data.data;
+
+      questions.forEach(q => {
+        const optionKeys = Object.keys(q.options);
+        q.sequence = shuffle(optionKeys);
+      })
+
+      return {quiz, questions};
+
+
+
+      // return response.data.data;
 
     } catch (error) {
       console.error(error);
