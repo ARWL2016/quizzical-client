@@ -16,8 +16,8 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "serve -s build",
+    "start": "react-scripts start",
+    "start:prod": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom"
   },

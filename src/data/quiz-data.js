@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { shuffle } from 'core/utils';
+import { server } from '../environment';
+
+
 
 async function getAll() {
     try {
-        const response = await axios.get(`http://localhost:3001/quiz`);
+        const response = await axios.get(`${server}/quiz`);
         return response.data.data.quizzes;
 
       } catch (error) {
