@@ -2,8 +2,6 @@ import axios from 'axios';
 import { shuffle } from 'core/utils';
 import { server } from '../environment';
 
-
-
 async function getAll() {
     try {
         const response = await axios.get(`${server}/quiz`);
@@ -16,7 +14,7 @@ async function getAll() {
 
 async function getQuizById(id) {
     try {
-        const response = await axios.get(`http://localhost:3001/quiz/${id}`);
+        const response = await axios.get(`${server}/quiz/${id}`);
         return response.data.data.quiz;
 
       } catch (error) {
@@ -26,7 +24,7 @@ async function getQuizById(id) {
 
 async function getQuizQuestions(id) {
   try {
-      const response = await axios.get(`http://localhost:3001/quiz/${id}/questions`);
+      const response = await axios.get(`${server}/quiz/${id}/questions`);
 
 
       const {quiz, questions } = response.data.data;
@@ -49,7 +47,7 @@ async function getQuizQuestions(id) {
 
 async function postQuiz(quiz) {
   try {
-    const response = await axios.post(`http://localhost:3001/quiz`, quiz);
+    const response = await axios.post(`${server}/quiz`, quiz);
     return response.data.data;
 
   } catch (error) {

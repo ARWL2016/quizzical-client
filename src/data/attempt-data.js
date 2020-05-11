@@ -1,9 +1,9 @@
 import axios from 'axios';
-
+import { server } from '../environment';
 
 async function getAttemptReport(id) {
     try {
-        const response = await axios.get(`http://localhost:3001/attempt/${id}/report`);
+        const response = await axios.get(`${server}/attempt/${id}/report`);
 
 
         return response.data.data.report;
@@ -15,7 +15,7 @@ async function getAttemptReport(id) {
 
 async function postAttempt(payload) {
     try {
-        const response = await axios.post(`http://localhost:3001/attempt`, payload);
+        const response = await axios.post(`${server}/attempt`, payload);
 
         return response.data.data.result;
 
